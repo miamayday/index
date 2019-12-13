@@ -1,0 +1,14 @@
+# data
+data/
+
+# db
+db/
+
+# server
+server/node_modules
+server/package-lock.json
+server/src/data.json
+
+# client
+client/node_modules
+client/package-lock.json
