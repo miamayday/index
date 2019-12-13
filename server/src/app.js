@@ -1,6 +1,6 @@
 'use-strict'
 
-const { uploadsPath } = require('./paths')
+const { uploadsPath, handleMissingDir } = require('./paths')
 
 /** FILE UPLOADER */
 
@@ -10,6 +10,9 @@ const storage = multer.diskStorage({
   destination: (req, file, cb) => {
     const format = file.originalname.split('.').pop()
     const subFolder = format === 'mp4' || format === 'webm' ? 'vid' : 'img'
+
+    handleMissingDir(`${uploadsPath}/${subFolder}`)
+
     cb(null, `${uploadsPath}/${subFolder}`)
   },
   filename: (req, file, cb) => {
@@ -27,7 +30,6 @@ let data
 try {
   data = require('./data.json')
 } catch (e) {
-  console.error('data.json missing')
   fs.writeFileSync('./src/data.json', JSON.stringify([], null, 2))
   data = require('./data.json')
   console.log('created data.json')

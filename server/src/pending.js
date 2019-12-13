@@ -1,6 +1,6 @@
 'use-strict'
 
-const { pendingPath, uploadsPath } = require('./paths')
+const { pendingPath, uploadsPath, handleMissingDir } = require('./paths')
 
 /** UPLOAD PENDING DATA */
 
@@ -16,10 +16,13 @@ try {
   console.log('created data.json')
 }
 
+handleMissingDir(pendingPath)
+
 // fetch pending files from folder
 const files = fs.readdirSync(pendingPath)
 
 if (files.length > 0) {
+
   function byFirstModified(a, b) {
     const a_target = fs.statSync(`${pendingPath}/${a}`).mtimeMs
     const b_target = fs.statSync(`${pendingPath}/${b}`).mtimeMs
@@ -41,6 +44,8 @@ if (files.length > 0) {
   for (file of files) {
     const format = file.split('.').pop()
     const type = format === 'mp4' || format === 'webm' ? 'vid' : 'img'
+
+    handleMissingDir(`${uploadsPath}/${type}/${file}`)
 
     if (fs.existsSync(`${uploadsPath}/${type}/${file}`)) {
       console.error(`${file} already exists`)
