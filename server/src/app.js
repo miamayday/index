@@ -21,21 +21,24 @@ const upload = multer({ storage: storage })
 
 /** APP */
 
+const fs = require('fs')
+let data
+
+try {
+  data = require('./data.json')
+} catch (e) {
+  console.error('data.json missing')
+  fs.writeFileSync('./src/data.json', JSON.stringify([], null, 2))
+  data = require('./data.json')
+  console.log('created data.json')
+}
+
 const express = require('express')
 const morgan = require('morgan')
 const bodyParser = require('body-parser')
 const cors = require('cors')
 
 const app = express()
-let data
-
-try {
-  data = require('./data.json')
-} catch (e) {
-  console.log('data.json not found, creating one...')
-  fs.writeFileSync('./src/data.json', JSON.stringify([], null, 2))
-  data = require('./data.json')
-}
 
 app.use(morgan('dev'))
 app.use(bodyParser.json())

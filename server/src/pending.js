@@ -10,9 +10,10 @@ let data
 try {
   data = require('./data.json')
 } catch (e) {
-  console.log('data.json not found, creating one...')
+  console.error('data.json missing')
   fs.writeFileSync('./src/data.json', JSON.stringify([], null, 2))
   data = require('./data.json')
+  console.log('created data.json')
 }
 
 // fetch pending files from folder
