@@ -1,8 +1,3 @@
-# data
-data/pending/*
-data/uploads/img/*
-data/uploads/vid/*
-
 # db
 db/
 
