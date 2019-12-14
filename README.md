@@ -1,3 +1,5 @@
+This is a file index implemented as a Vue/Node/Express application. Only image and video files are accepted.
+
 # server
 
 ## Project setup
