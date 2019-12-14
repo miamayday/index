@@ -3,7 +3,7 @@
     <card
       v-for="file in files"
       :key="file.id"
-      :path="getPath(file.name)"
+      :path="getPath(file)"
       :file="file"
       @searchBy="onClickTag"
     />
@@ -16,7 +16,6 @@ import Card from './Card'
 export default {
   name: 'gallery',
   components: { Card },
-  props: ['searcher'],
   computed: {
     files() {
       const allFiles = this.$store.getters.files
@@ -63,9 +62,8 @@ export default {
     }
   },
   methods: {
-    getPath(fileName) {
-      const format = fileName.split('.').pop()
-      return this.searcher[format]('./' + fileName)
+    getPath(file) {
+      return require(`./../../../data/uploads/${file.type}/${file.name}`)
     },
     onClickTag(value) {
       this.filter = value

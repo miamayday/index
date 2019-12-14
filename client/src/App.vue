@@ -2,7 +2,7 @@
   <div id="app">
     <upload />
     <search />
-    <gallery :searcher="searcher" />
+    <gallery />
   </div>
 </template>
 
@@ -18,16 +18,6 @@ export default {
   components: { Search, Gallery, Upload },
   data() {
     return {
-      searcher: {
-        // 1. cause of error after changes
-        jpeg: require.context('./../../data/uploads/img', false, /\.jpeg$/),
-        jpg: require.context('./../../data/uploads/img', false, /\.jpg$/),
-        png: require.context('./../../data/uploads/img', false, /\.png$/),
-        webp: require.context('./../../data/uploads/img', false, /\.webp$/),
-        mp4: require.context('./../../data/uploads/vid', false, /\.mp4$/),
-        gif: require.context('./../../data/uploads/img', false, /\.gif$/),
-        webm: require.context('./../../data/uploads/vid', false, /\.webm$/)
-      }
       // tags: []
     }
   },
