@@ -63,7 +63,11 @@ export default {
   },
   methods: {
     getPath(file) {
-      return require(`./../../../data/uploads/${file.type}/${file.name}`)
+      try {
+        return require(`./../../../data/uploads/${file.type}/${file.name}`)
+      } catch (e) {
+        console.error(e)
+      }
     },
     onClickTag(value) {
       this.filter = value
