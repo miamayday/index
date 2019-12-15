@@ -8,41 +8,39 @@
 
 <script>
 import axios from 'axios'
+import JQuery from 'jquery'
 
 import Search from '@/components/Search'
 import Gallery from '@/components/Gallery'
 import Upload from '@/components/Upload'
 
+const $ = JQuery
+
 export default {
   name: 'app',
   components: { Search, Gallery, Upload },
-  data() {
-    return {
-      windowWidth: 0,
-      windowHeight: 0
-      // tags: []
-    }
-  },
   mounted() {
     axios.get('http://localhost:8081/files').then(response => {
       this.$store.commit('initFiles', response.data)
-      // this.tags = [...new Set(this.$store.getters.files.flatMap(f => f.tags))]
     })
 
-    window.addEventListener('resize', this.getWindowWidth)
-    window.addEventListener('resize', this.getWindowHeight)
+    window.addEventListener('resize', this.onWindowResize)
+    this.preserveRatio()
   },
   methods: {
-    getWindowWidth(event) {
-      this.windowWidth = document.documentElement.clientWidth
+    preserveRatio() {
+      const gridTemplateColumns = $('.grid').css('grid-template-columns')
+      const width = gridTemplateColumns.split('px')[0]
+      $('.grid').css({
+        'grid-auto-rows': width + 'px'
+      })
     },
-    getWindowHeight(event) {
-      this.windowHeight = document.documentElement.clientHeight
+    onWindowResize(event) {
+      this.preserveRatio()
     }
   },
   beforeDestroy() {
-    window.removeEventListener('resize', this.getWindowWidth)
-    window.removeEventListener('resize', this.getWindowHeight)
+    window.removeEventListener('resize', this.onWindowResize)
   }
 }
 </script>

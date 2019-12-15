@@ -30,6 +30,11 @@ export default {
     path: String,
     file: Object
   },
+  data() {
+    return {
+      onPreview: false
+    }
+  },
   methods: {
     playVideo() {
       let video = this.$refs.video
@@ -47,15 +52,41 @@ export default {
   overflow-wrap: break-word;
   font-style: italic;
   color: #e895ab;
+  /* background: rgba(0, 0, 0, 0.1); */
+}
+/* .card {
+  position: relative;
+  background: rgba(0, 0, 0, 0.1);
+}
+.card::before {
+  content: '';
+  display: block;
+  padding-top: 100%;
+}
+.card .content {
+  position: absolute;
+  top: 50;
+  left: 0;
+  height: 100%;
+  width: 100%;
+} */
+.card:hover {
+  cursor: default;
 }
 .card img {
-  max-width: 100%;
+  width: 100%;
+  max-height: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 .card img:focus {
   outline: none;
 }
 .card video {
-  max-width: 100%;
+  width: 100%;
+  max-height: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 .card video:focus {
   outline: none;

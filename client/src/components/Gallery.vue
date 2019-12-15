@@ -1,5 +1,8 @@
 <template>
-  <div class="gallery">
+  <div
+    id="gallery"
+    class="grid"
+  >
     <card
       v-for="file in files"
       :key="file.id"
@@ -77,9 +80,10 @@ export default {
 </script>
 
 <style scoped>
-.gallery {
+.grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(20rem, 1fr));
+  grid-auto-rows: 20rem;
   grid-gap: 40px;
 }
 </style>
