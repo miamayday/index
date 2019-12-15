@@ -18,6 +18,8 @@ export default {
   components: { Search, Gallery, Upload },
   data() {
     return {
+      windowWidth: 0,
+      windowHeight: 0
       // tags: []
     }
   },
@@ -26,6 +28,21 @@ export default {
       this.$store.commit('initFiles', response.data)
       // this.tags = [...new Set(this.$store.getters.files.flatMap(f => f.tags))]
     })
+
+    window.addEventListener('resize', this.getWindowWidth)
+    window.addEventListener('resize', this.getWindowHeight)
+  },
+  methods: {
+    getWindowWidth(event) {
+      this.windowWidth = document.documentElement.clientWidth
+    },
+    getWindowHeight(event) {
+      this.windowHeight = document.documentElement.clientHeight
+    }
+  },
+  beforeDestroy() {
+    window.removeEventListener('resize', this.getWindowWidth)
+    window.removeEventListener('resize', this.getWindowHeight)
   }
 }
 </script>
