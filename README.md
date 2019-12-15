@@ -28,3 +28,8 @@ npm install
 ```
 npm run serve
 ```
+
+### Compiles and hot-reloads both the server and client for development
+```
+npm run dev
+```
