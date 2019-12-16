@@ -27,6 +27,9 @@ export default {
     window.addEventListener('resize', this.onWindowResize)
     this.preserveRatio()
   },
+  update() {
+    this.preserveRatio()
+  },
   methods: {
     preserveRatio() {
       const gridTemplateColumns = $('.grid').css('grid-template-columns')

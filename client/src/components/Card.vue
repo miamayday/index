@@ -14,12 +14,12 @@
         :type="`video/${file.name.split('.').pop()}`"
       />
     </video>
-    <div>{{ file.name }}</div>
+    <!-- <div>{{ file.name }}</div>
     <a
       v-for="tag in file.tags"
       :key="tag"
       @click="$emit('searchBy', tag)"
-    >{{ tag }}</a>
+    >{{ tag }}</a> -->
   </div>
 </template>
 

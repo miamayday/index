@@ -84,6 +84,12 @@ export default {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(20rem, 1fr));
   grid-auto-rows: 20rem;
-  grid-gap: 40px;
+  grid-gap: 1px;
+}
+@media only screen and (min-width: 1000px) {
+  .grid {
+    grid-gap: 40px;
+    margin: 0 15%;
+  }
 }
 </style>
