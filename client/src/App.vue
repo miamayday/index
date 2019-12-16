@@ -1,46 +1,46 @@
 <template>
   <div id="app">
-    <upload />
+    <div id="nav">
+      <router-link to="/">index</router-link>
+      <router-link to="/upload">upload</router-link>
+    </div>
+    <router-view></router-view>
+    <!-- <upload />
     <search />
-    <gallery />
+    <gallery />-->
   </div>
 </template>
 
 <script>
 import axios from 'axios'
 import JQuery from 'jquery'
-
-import Search from '@/components/Search'
-import Gallery from '@/components/Gallery'
-import Upload from '@/components/Upload'
+import myMixin from './mixins/myMixin.js'
 
 const $ = JQuery
 
 export default {
   name: 'app',
-  components: { Search, Gallery, Upload },
+  mixins: [myMixin],
   mounted() {
     axios.get('http://localhost:8081/files').then(response => {
       this.$store.commit('initFiles', response.data)
     })
 
     window.addEventListener('resize', this.onWindowResize)
-    this.preserveRatio()
   },
-  update() {
-    this.preserveRatio()
+  watch: {
+    $route(to, from) {
+      // console.log('going to', to)
+      // this.preserveRatio()
+    }
   },
   methods: {
-    preserveRatio() {
-      const gridTemplateColumns = $('.grid').css('grid-template-columns')
-      const width = gridTemplateColumns.split('px')[0]
-      $('.grid').css({
-        'grid-auto-rows': width + 'px'
-      })
-    },
     onWindowResize(event) {
       this.preserveRatio()
     }
+  },
+  update() {
+    this.preserveRatio()
   },
   beforeDestroy() {
     window.removeEventListener('resize', this.onWindowResize)
@@ -54,5 +54,17 @@ export default {
 html {
   font-size: 12px;
   font-family: 'Roboto', sans-serif;
+}
+#nav {
+  margin: 50px 0;
+  text-align: center;
+}
+/* #nav:first-child {
+  margin-left: 20px;
+} */
+#nav > * {
+  margin-right: 20px;
+  color: inherit;
+  text-decoration: none;
 }
 </style>

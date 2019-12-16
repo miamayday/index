@@ -3,3 +3,5 @@ dark mode
 ability to view individual files
 router-view
 separate upload page
+video pauses when clicking outside its area
+preserve cards between route changes

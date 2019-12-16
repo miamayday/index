@@ -1,8 +1,5 @@
 <template>
-  <div
-    id="gallery"
-    class="grid"
-  >
+  <div class="grid">
     <card
       v-for="file in files"
       :key="file.id"
@@ -14,11 +11,16 @@
 </template>
 
 <script>
+import myMixin from '@/mixins/myMixin.js'
 import Card from './Card'
 
 export default {
   name: 'gallery',
+  mixins: [myMixin],
   components: { Card },
+  mounted() {
+    this.preserveRatio()
+  },
   computed: {
     files() {
       const allFiles = this.$store.getters.files
