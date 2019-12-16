@@ -1,0 +1,5 @@
+sqlite 3 database
+dark mode
+ability to view individual files
+router-view
+separate upload page
