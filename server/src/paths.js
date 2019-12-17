@@ -1,8 +1,10 @@
 const fs = require('fs')
 
-const dataPath = './../data'
-const pendingPath = './../data/pending'
-const uploadsPath = './../data/uploads'
+const indexConfig = require('./../../config.js')
+
+const dataPath = './../' + indexConfig.RELATIVE_PATH_TO_DATA_DIR
+const pendingPath = dataPath + '/pending'
+const uploadsPath = dataPath + '/uploads'
 
 const dropLastFolder = path => {
   const lastFolder = path.split('/').pop()

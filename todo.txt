@@ -2,4 +2,4 @@ sqlite 3 database
 dark mode
 ability to view individual files
 video pauses when clicking outside its area
-preserve cards between route changes
+pagination

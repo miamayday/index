@@ -1,14 +1,10 @@
 <template>
-  <div>
+  <div id="search">
     <input
       v-model="filter"
       placeholder="search for pix"
-      :style="{ marginBottom: '40px' }"
     />
-    <button
-      :style="{ margin: '0 10px', textAlign: 'center' }"
-      @click="filter=''"
-    >reset</button>
+    <button @click="filter=''">reset</button>
   </div>
 </template>
 
@@ -28,5 +24,13 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
+#search {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 40px;
+}
+#search > * {
+  margin-right: 10px;
+}
 </style>

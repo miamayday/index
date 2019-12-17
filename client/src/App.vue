@@ -4,17 +4,16 @@
       <router-link to="/">index</router-link>
       <router-link to="/upload">upload</router-link>
     </div>
-    <router-view></router-view>
-    <!-- <upload />
-    <search />
-    <gallery />-->
+    <keep-alive include="index">
+      <router-view></router-view>
+    </keep-alive>
   </div>
 </template>
 
 <script>
 import axios from 'axios'
 import JQuery from 'jquery'
-import myMixin from './mixins/myMixin.js'
+import myMixin from '@/mixins/myMixin.js'
 
 const $ = JQuery
 
