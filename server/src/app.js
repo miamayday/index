@@ -1,6 +1,15 @@
 'use-strict'
 
-const { uploadsPath, handleMissingDir } = require('./paths')
+const { dbFilePath, uploadsPath, handleMissingDir } = require('./paths')
+
+// const sqlite3 = require('sqlite3').verbose()
+
+// const db = new sqlite3.Database(dbFilePath, (err) => {
+//   if (err) {
+//     return console.error('Could not connect to database:', err.message)
+//   }
+//   console.log('Connected to database')
+// })
 
 /** FILE UPLOADER */
 
@@ -32,7 +41,7 @@ try {
 } catch (e) {
   fs.writeFileSync('./src/data.json', JSON.stringify([], null, 2))
   data = require('./data.json')
-  console.log('created data.json')
+  console.log('Created data.json')
 }
 
 const express = require('express')

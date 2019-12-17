@@ -5,6 +5,7 @@ const indexConfig = require('./../../config.js')
 const dataPath = './../' + indexConfig.RELATIVE_PATH_TO_DATA_DIR
 const pendingPath = dataPath + '/pending'
 const uploadsPath = dataPath + '/uploads'
+const dbFilePath = './../' + indexConfig.RELATIVE_PATH_TO_DB_FILE
 
 const dropLastFolder = path => {
   const lastFolder = path.split('/').pop()
@@ -30,5 +31,6 @@ module.exports = {
   dataPath,
   pendingPath,
   uploadsPath,
+  dbFilePath,
   handleMissingDir
 }
