@@ -3,3 +3,7 @@ dark mode
 ability to view individual files
 video pauses when clicking outside its area
 pagination
+tagging
+order reversed by default
+search request processor combining tags, type, and format
+automatic tagger script (python?)
