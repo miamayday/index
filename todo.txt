@@ -2,7 +2,8 @@ sqlite 3 database
 dark mode
 ability to view individual files
 video pauses when clicking outside its area
-pagination
+responsive page capacity
+scroll to top
 tagging
 order reversed by default
 search request processor combining tags, type, and format

@@ -23,55 +23,63 @@ export default {
   },
   computed: {
     files() {
-      const allFiles = this.$store.getters.files
-      const filter = this.$store.getters.filter
+      const files = this.$store.getters.files
+      const start = this.$store.getters.start
+      const end = this.$store.getters.end
 
-      if (filter == '') return allFiles
+      console.log('from', start, 'to', end)
 
-      let filters = filter.split(',').filter(f => f !== '')
-      let results = []
-      for (const filter of filters) {
-        // let result = allFiles.filter(f =>
-        //   (f.tags.join('') + f.type)
-        //     .toLowerCase()
-        //     .includes(filter.toLowerCase())
-        // )
+      return files.slice(start, end)
+      // return []
 
-        // let result = allFiles.filter(f =>
-        //   (f.name.split('.').pop())
-        //     .toLowerCase()
-        //     .includes(filter.toLowerCase())
-        // )
+      // const allFiles = this.$store.getters.files
+      // const filter = this.$store.getters.filter
 
-        let result = allFiles.filter(f => {
-          const format = f.name.split('.').pop()
-          if (format.toLowerCase().includes(filter.toLowerCase())) {
-            return true
-          } else {
-            return false
-          }
-        })
+      // if (filter == '') return allFiles
 
-        // let result = allFiles.filter(f => function() {
-        //   const format = f.split('.').pop()
-        //   const interval = f.tags.join('') + f.type + format
-        //   if (interval.toLowerCase().includes(filter.toLowerCase())) {
-        //     return true
-        //   } else {
-        //     return false
-        //   }
-        // })
-        results = results.concat.apply([], result)
-      }
-      return results
+      // let filters = filter.split(',').filter(f => f !== '')
+      // let results = []
+      // for (const filter of filters) {
+      // let result = allFiles.filter(f =>
+      //   (f.tags.join('') + f.type)
+      //     .toLowerCase()
+      //     .includes(filter.toLowerCase())
+      // )
+
+      // let result = allFiles.filter(f =>
+      //   (f.name.split('.').pop())
+      //     .toLowerCase()
+      //     .includes(filter.toLowerCase())
+      // )
+
+      // let result = allFiles.filter(f => {
+      //   const format = f.name.split('.').pop()
+      //   if (format.toLowerCase().includes(filter.toLowerCase())) {
+      //     return true
+      //   } else {
+      //     return false
+      //   }
+      // })
+
+      // let result = allFiles.filter(f => function() {
+      //   const format = f.split('.').pop()
+      //   const interval = f.tags.join('') + f.type + format
+      //   if (interval.toLowerCase().includes(filter.toLowerCase())) {
+      //     return true
+      //   } else {
+      //     return false
+      //   }
+      // })
+      // results = results.concat.apply([], result)
     }
+    // return results
   },
   methods: {
     getPath(file) {
       try {
         return require(`./../../../data/uploads/${file.type}/${file.name}`)
       } catch (e) {
-        console.error(e)
+        console.error(e.message)
       }
     },
     onClickTag(value) {

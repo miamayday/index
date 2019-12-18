@@ -58,9 +58,6 @@ html {
   margin: 50px 0;
   text-align: center;
 }
-/* #nav:first-child {
-  margin-left: 20px;
-} */
 #nav > * {
   margin-right: 20px;
   color: inherit;
