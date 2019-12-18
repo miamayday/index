@@ -7,3 +7,6 @@ tagging
 order reversed by default
 search request processor combining tags, type, and format
 automatic tagger script (python?)
+error handling for invalid files
+independecy between backend components
+application doesn't crash when missing data
