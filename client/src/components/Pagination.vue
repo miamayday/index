@@ -1,39 +1,57 @@
 <template>
   <div>
     <div id="pagination">
-      <a @click="decrementPage()">prev</a>
-      <span>{{ this.page }}</span>
-      <a @click="incrementPage()">next</a>
+      <a
+        v-if="this.scrollToTop"
+        @click="decrementPage(); backToTop();"
+      >prev</a>
+      <a
+        v-else
+        @click="decrementPage()"
+      >prev</a>
+      <span>{{ this.getPage }}</span>
+      <a
+        v-if="this.scrollToTop"
+        @click="incrementPage(); backToTop();"
+      >next</a>
+      <a
+        v-else
+        @click="incrementPage()"
+      >next</a>
     </div>
-    <slot></slot>
   </div>
 </template>
 
 <script>
 export default {
   name: 'pagination',
-  data() {
-    return {
-      page: 1,
-      capacity: 12
+  props: ['scrollToTop'],
+  computed: {
+    getPage() {
+      return this.$store.getters.page
     }
   },
   methods: {
+    backToTop() {
+      window.scrollTo(0, 0)
+    },
     incrementPage() {
       const nofFiles = this.$store.getters.files.length
-      const lastPage = Math.ceil(nofFiles / this.capacity)
+      const page = this.$store.getters.page
+      const capacity = this.$store.getters.capacity
+      const lastPage = Math.ceil(nofFiles / capacity)
 
-      let start = (this.page - 1) * this.capacity
-      let end = start + this.capacity
+      let start = (page - 1) * capacity
+      let end = start + capacity
 
       if (this.page === lastPage - 1) {
-        start += this.capacity
+        start += capacity
         end = nofFiles
-        this.page++
-      } else if (this.page < lastPage - 1) {
-        start += this.capacity
-        end += this.capacity
-        this.page++
+        this.$store.commit('setPage', page + 1)
+      } else if (page < lastPage - 1) {
+        start += capacity
+        end += capacity
+        this.$store.commit('setPage', page + 1)
       }
 
       this.$store.commit('setStart', start)
@@ -41,20 +59,22 @@ export default {
     },
     decrementPage() {
       const nofFiles = this.$store.getters.files.length
+      const page = this.$store.getters.page
+      const capacity = this.$store.getters.capacity
       const lastPage = Math.ceil(nofFiles / this.capacity)
 
-      let start = (this.page - 1) * this.capacity
-      let end = start + this.capacity
+      let start = (page - 1) * capacity
+      let end = start + capacity
 
-      if (this.page === lastPage && this.page > 1) {
-        const mod = nofFiles % this.capacity
+      if (page === lastPage && page > 1) {
+        const mod = nofFiles % capacity
         end = nofFiles - mod
-        start = end - this.capacity
-        this.page--
-      } else if (this.page > 1) {
-        start -= this.capacity
-        end -= this.capacity
-        this.page--
+        start = end - capacity
+        this.$store.commit('setPage', page - 1)
+      } else if (page > 1) {
+        start -= capacity
+        end -= capacity
+        this.$store.commit('setPage', page - 1)
       }
 
       this.$store.commit('setStart', start)

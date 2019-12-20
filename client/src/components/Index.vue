@@ -3,6 +3,7 @@
     <search />
     <pagination />
     <gallery />
+    <pagination :scrollToTop="true" />
   </div>
 </template>
 

@@ -7,8 +7,12 @@ export const store = new Vuex.Store({
   state: {
     files: [],
     filter: '',
-    start: 0,
-    end: 12
+    pagination: {
+      page: 1,
+      capacity: 12,
+      start: 0,
+      end: 12
+    }
   },
   mutations: {
     initFiles(state, files) {
@@ -18,17 +22,22 @@ export const store = new Vuex.Store({
     updateFilter(state, filter) {
       state.filter = filter
     },
+    setPage(state, page) {
+      state.pagination.page = page
+    },
     setStart(state, start) {
-      state.start = start
+      state.pagination.start = start
     },
     setEnd(state, end) {
-      state.end = end
+      state.pagination.end = end
     }
   },
   getters: {
     files: state => state.files,
     filter: state => state.filter,
-    start: state => state.start,
-    end: state => state.end
+    page: state => state.pagination.page,
+    capacity: state => state.pagination.capacity,
+    start: state => state.pagination.start,
+    end: state => state.pagination.end
   }
 })
