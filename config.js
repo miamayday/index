@@ -1,7 +1,7 @@
-const RELATIVE_PATH_TO_DATA_DIR = './data'
-const RELATIVE_PATH_TO_DB_FILE = './db/data.db'
+const DATA_DIR_PATH = './data'
+const DB_FILE_PATH = './db/data.db'
 
 module.exports = {
-  RELATIVE_PATH_TO_DATA_DIR,
-  RELATIVE_PATH_TO_DB_FILE
+  DATA_DIR_PATH,
+  DB_FILE_PATH
 }

@@ -42,6 +42,7 @@ function runSqlConverter() {
   )
   `
 
+  // create files table if one doesn't already exist
   db.run(sql)
 
   for (file of data) {

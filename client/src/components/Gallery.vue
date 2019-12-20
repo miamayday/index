@@ -1,12 +1,17 @@
 <template>
   <div class="grid">
-    <card
+    <div
+      class="grid-item-container"
       v-for="file in files"
       :key="file.id"
-      :path="getPath(file)"
-      :file="file"
-      @searchBy="onClickTag"
-    />
+    >
+      <card
+        class="grid-item"
+        :path="getPath(file)"
+        :file="file"
+        @searchBy="onClickTag"
+      />
+    </div>
   </div>
 </template>
 
@@ -89,17 +94,58 @@ export default {
 }
 </script>
 
-<style scoped>
+<style>
 .grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(20rem, 1fr));
-  grid-auto-rows: 20rem;
-  grid-gap: 1px;
+  margin: 0 auto;
 }
-@media only screen and (min-width: 1000px) {
+@media only screen and (max-width: 1100px) {
   .grid {
-    grid-gap: 40px;
-    margin: 0 15%;
+    width: 100%;
+  }
+  .grid-item-container {
+    float: left;
+    position: relative;
+    padding-bottom: calc(100% / 3);
+    width: calc(100% / 3);
+  }
+  .grid-item {
+    position: absolute;
+    top: 0;
+    bottom: 1px;
+    left: 0;
+    right: 1px;
+  }
+  .grid::after {
+    content: '';
+    display: block;
+    clear: both;
+  }
+}
+@media only screen and (min-width: 1100px) {
+  .grid {
+    width: 80%;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(20rem, 1fr));
+    grid-auto-rows: 1fr;
+    grid-gap: 4em;
+  }
+  .grid-item-container {
+    float: left;
+    position: relative;
+    padding-bottom: 100%;
+    width: 100%;
+  }
+  .grid-item {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+  }
+  .grid::after {
+    content: '';
+    display: block;
+    clear: both;
   }
 }
 </style>

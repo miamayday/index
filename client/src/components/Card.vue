@@ -19,7 +19,7 @@
       v-for="tag in file.tags"
       :key="tag"
       @click="$emit('searchBy', tag)"
-    >{{ tag }}</a> -->
+    >{{ tag }}</a>-->
   </div>
 </template>
 
@@ -51,25 +51,7 @@ export default {
   display: block;
   overflow-wrap: break-word;
   font-style: italic;
-  color: #e895ab;
-  /* background: rgba(0, 0, 0, 0.1); */
 }
-/* .card {
-  position: relative;
-  background: rgba(0, 0, 0, 0.1);
-}
-.card::before {
-  content: '';
-  display: block;
-  padding-top: 100%;
-}
-.card .content {
-  position: absolute;
-  top: 50;
-  left: 0;
-  height: 100%;
-  width: 100%;
-} */
 .card:hover {
   cursor: default;
 }
