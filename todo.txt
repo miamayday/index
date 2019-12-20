@@ -3,7 +3,6 @@ dark mode
 ability to view individual files
 video pauses when clicking outside its area
 responsive page capacity
-scroll to top
 tagging
 order reversed by default
 search request processor combining tags, type, and format
