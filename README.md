@@ -1,4 +1,4 @@
-This is a file index implemented as a Vue/Node/Express application. Only image and video files are accepted.
+To initialize the project, run chmod +x initialize.sh && ./initialize.sh.
 
 # server
 
@@ -10,11 +10,6 @@ npm install
 ### Compiles and hot-reloads for development
 ```
 npm run nodemon
-```
-
-### Adds pending files to uploads
-```
-npm run pending
 ```
 
 # client
