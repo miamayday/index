@@ -25,6 +25,9 @@ export default {
   components: { Card },
   mounted() {
     this.preserveRatio()
+    const columns = this.nofColumns()
+    const capacity = this.$store.getters.capacity
+    // fix capacity issue...
   },
   computed: {
     files() {
@@ -148,4 +151,9 @@ export default {
     clear: both;
   }
 }
+/* @media only screen and (min-width: 1750px) {
+  .grid {
+    grid-template-columns: repeat(5, 1fr);
+  }
+} */
 </style>

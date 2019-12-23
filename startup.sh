@@ -18,3 +18,6 @@ mkdir vid
 
 echo *** Create db folder ***
 cd ../../ && mkdir db
+
+echo *** Initialize database ***
+node server/src/scripts/startupDB.js

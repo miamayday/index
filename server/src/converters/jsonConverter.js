@@ -1,22 +1,28 @@
 'use-strict'
 
-const {
-  pendingPath,
-  duplicatesPath,
-  uploadsPath,
-  handleMissingDir,
-  dbFilePath
-} = require('./paths')
+const { pendingPath, uploadsPath, handleMissingDir } = require('../paths')
+
+/** UPLOAD PENDING DATA */
+
 const fs = require('fs')
-const sqlite3 = require('sqlite3').verbose()
+let data
+
+try {
+  data = require('./data.json')
+} catch (e) {
+  console.error('data.json missing')
+  fs.writeFileSync('./src/data.json', JSON.stringify([], null, 2))
+  data = require('./data.json')
+  console.log('created data.json')
+}
 
 handleMissingDir(pendingPath)
-handleMissingDir(duplicatesPath)
 
 // fetch pending files from folder
 const files = fs.readdirSync(pendingPath)
 
 if (files.length > 0) {
+
   function byFirstModified(a, b) {
     const a_target = fs.statSync(`${pendingPath}/${a}`).mtimeMs
     const b_target = fs.statSync(`${pendingPath}/${b}`).mtimeMs
@@ -30,8 +36,9 @@ if (files.length > 0) {
     }
   }
 
-  // sort pending files
   files.sort(byFirstModified)
+
+  let id = data[data.length - 1].id
 
   // process pending files
   for (file of files) {
@@ -42,13 +49,18 @@ if (files.length > 0) {
 
     if (fs.existsSync(`${uploadsPath}/${type}/${file}`)) {
       console.error(`${file} already exists`)
-
-      // copy duplicate file to duplicates folder
-      fs.copyFileSync(
-        `${pendingPath}/${file}`,
-        `${duplicatesPath}/${file}`
-      )
     } else {
+      // create file object of pending file
+      const fileObj = {
+        id: ++id,
+        name: file,
+        type,
+        tags: []
+      }
+
+      // push file object to data array
+      data.push(fileObj)
+
       // copy pending file to data folder
       fs.copyFileSync(
         `${pendingPath}/${file}`,
@@ -61,4 +73,7 @@ if (files.length > 0) {
     // remove pending file from file system
     fs.unlinkSync(`${pendingPath}/${file}`)
   }
+
+  // write new data array to data.json
+  fs.writeFileSync('./src/data.json', JSON.stringify(data, null, 2))
 }

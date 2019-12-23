@@ -25,7 +25,7 @@ export default {
       this.$store.commit('initFiles', response.data)
     })
 
-    // window.addEventListener('resize', this.onWindowResize)
+    window.addEventListener('resize', this.onWindowResize)
   },
   watch: {
     $route(to, from) {

@@ -1,11 +1,10 @@
 const fs = require('fs')
 
-const indexConfig = require('./../../config.js')
-
-const dataPath = './../' + indexConfig.DATA_DIR_PATH
+const dataPath = './../data'
 const pendingPath = dataPath + '/pending'
+const duplicatesPath = dataPath + '/duplicates'
 const uploadsPath = dataPath + '/uploads'
-const dbFilePath = './../' + indexConfig.DB_FILE_PATH
+const dbFilePath = './../db/data.db'
 
 const dropLastFolder = path => {
   const lastFolder = path.split('/').pop()
@@ -30,6 +29,7 @@ const handleMissingDir = path => {
 module.exports = {
   dataPath,
   pendingPath,
+  duplicatesPath,
   uploadsPath,
   dbFilePath,
   handleMissingDir

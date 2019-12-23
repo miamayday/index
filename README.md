@@ -1,11 +1,9 @@
-To initialize the project, run chmod +x initialize.sh && ./initialize.sh.
-
-# server
-
 ## Project setup
 ```
-npm install
+chmod +x initialize.sh && ./initialize.sh
 ```
+
+# server
 
 ### Compiles and hot-reloads for development
 ```
@@ -13,11 +11,6 @@ npm run nodemon
 ```
 
 # client
-
-## Project setup
-```
-npm install
-```
 
 ### Compiles and hot-reloads for development
 ```
