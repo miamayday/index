@@ -3,7 +3,7 @@
 const sqlite3 = require('sqlite3').verbose()
 
 let dbFilePath = '../../../db/data.db'
-let db = new sqlite3.Database(dbFilePath, sqlite3.OPEN_CREATE, err => {
+let db = new sqlite3.Database(dbFilePath, sqlite3.OPEN_READWRITE | sqlite3.OPEN_CREATE, err => {
   if (err) {
     console.error('Could not connect to database:', err.message)
   } else {
