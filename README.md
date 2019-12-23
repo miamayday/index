@@ -1,6 +1,6 @@
 ## Project setup
 ```
-chmod +x initialize.sh && ./initialize.sh
+chmod +x startup.sh && ./startup.sh
 ```
 
 # server
