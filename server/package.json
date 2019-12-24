@@ -6,8 +6,7 @@
   "scripts": {
     "start": "node src/app.js",
     "nodemon": "./node_modules/nodemon/bin/nodemon.js src/app.js",
-    "pending": "node src/pending.js",
-    "convert": "node src/sqlConverter.js",
+    "pending": "node src/scripts/pending.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",

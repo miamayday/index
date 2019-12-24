@@ -23,4 +23,7 @@ printf "*** Initialize database ***\n"
 cd server/src/scripts && node startupDB.js
 
 printf "*** Add execution rights to other scripts ***\n"
-cd ../../../ && chmod +x run.sh
+cd ../../../
+chmod +x run.sh
+chmod +x reset.sh
+chmod +x refresh.sh

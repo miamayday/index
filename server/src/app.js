@@ -12,13 +12,14 @@ const multer = require('multer')
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
     const subFolder = file.mimetype.includes('image') ? 'img' : 'vid'
-    const fileObj = {
+
+    // add link to sqlite3 database
+    dao.addFile({
       name: file.originalname,
       type: subFolder,
       tags: []
-    }
+    })
 
-    dao.addFile(fileObj)
     cb(null, `${config.paths.uploads}/${subFolder}`)
   },
   filename: (req, file, cb) => {
