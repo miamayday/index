@@ -25,24 +25,18 @@ export default {
       this.$store.commit('initFiles', response.data)
     })
 
-    window.addEventListener('resize', this.onWindowResize)
-  },
-  watch: {
-    $route(to, from) {
-      // console.log('going to', to)
-      // this.preserveRatio()
-    }
+    //window.addEventListener('resize', this.onWindowResize)
   },
   methods: {
     onWindowResize(event) {
-      this.preserveRatio()
+      //this.preserveRatio()
     }
   },
   update() {
-    this.preserveRatio()
+    //this.preserveRatio()
   },
   beforeDestroy() {
-    window.removeEventListener('resize', this.onWindowResize)
+    //window.removeEventListener('resize', this.onWindowResize)
   }
 }
 </script>

@@ -24,7 +24,6 @@ export default {
   mixins: [myMixin],
   components: { Card },
   mounted() {
-    this.preserveRatio()
     const columns = this.nofColumns()
     const capacity = this.$store.getters.capacity
     // fix capacity issue...
