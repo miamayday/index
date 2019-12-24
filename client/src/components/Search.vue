@@ -24,7 +24,7 @@ export default {
 }
 </script>
 
-<style scoped>
+<style>
 #search {
   display: flex;
   justify-content: center;

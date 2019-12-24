@@ -1,15 +1,9 @@
 'use-strict'
 
-const { dbFilePath, uploadsPath, handleMissingDir } = require('./paths')
+const config = require('./config')
+const AppDAO = require('./services/dao')
 
-// const sqlite3 = require('sqlite3').verbose()
-
-// const db = new sqlite3.Database(dbFilePath, (err) => {
-//   if (err) {
-//     return console.error('Could not connect to database:', err.message)
-//   }
-//   console.log('Connected to database')
-// })
+const dao = new AppDAO(config.paths.db)
 
 /** FILE UPLOADER */
 
@@ -17,12 +11,15 @@ const multer = require('multer')
 
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
-    const format = file.originalname.split('.').pop()
-    const subFolder = format === 'mp4' || format === 'webm' ? 'vid' : 'img'
+    const subFolder = file.mimetype.includes('image') ? 'img' : 'vid'
+    const fileObj = {
+      name: file.originalname,
+      type: subFolder,
+      tags: []
+    }
 
-    handleMissingDir(`${uploadsPath}/${subFolder}`)
-
-    cb(null, `${uploadsPath}/${subFolder}`)
+    dao.addFile(fileObj)
+    cb(null, `${config.paths.uploads}/${subFolder}`)
   },
   filename: (req, file, cb) => {
     cb(null, file.originalname)
@@ -32,17 +29,6 @@ const storage = multer.diskStorage({
 const upload = multer({ storage: storage })
 
 /** APP */
-
-const fs = require('fs')
-let data
-
-try {
-  data = require('./data.json')
-} catch (e) {
-  fs.writeFileSync('./src/data.json', JSON.stringify([], null, 2))
-  data = require('./data.json')
-  console.log('Created data.json')
-}
 
 const express = require('express')
 const morgan = require('morgan')
@@ -56,7 +42,12 @@ app.use(bodyParser.json())
 app.use(cors())
 
 app.get('/files', (req, res) => {
-  res.send(data)
+  dao.getFiles().then(result => {
+    res.send(result)
+  }, err => {
+    console.log(err.message)
+    res.send([])
+  })
 })
 
 app.post('/upload', upload.single('file'), (req, res) => {

@@ -84,7 +84,7 @@ export default {
 }
 </script>
 
-<style scoped>
+<style>
 #pagination {
   margin: 50px 0;
   text-align: center;

@@ -1,12 +1,12 @@
 #!/bin/sh
 
-echo *** Initialize server ***
+printf "*** Initialize server ***\n"
 cd server && npm install
 
-echo *** Initialize client ***
+printf "*** Initialize client ***\n"
 cd ../client && npm install
 
-echo *** Create data folder ***
+printf "*** Create data folder ***\n"
 cd ../ && mkdir data
 cd data
 mkdir pending
@@ -16,8 +16,11 @@ cd uploads
 mkdir img
 mkdir vid
 
-echo *** Create db folder ***
+printf "*** Create db folder ***\n"
 cd ../../ && mkdir db
 
-echo *** Initialize database ***
+printf "*** Initialize database ***\n"
 cd server/src/scripts && node startupDB.js
+
+printf "*** Add execution rights to other scripts ***\n"
+cd ../../../ && chmod +x run.sh

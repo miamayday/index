@@ -46,7 +46,7 @@ export default {
 }
 </script>
 
-<style scoped>
+<style>
 .card {
   display: block;
   overflow-wrap: break-word;

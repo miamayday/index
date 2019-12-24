@@ -7,8 +7,6 @@ let db = new sqlite3.Database(dbFilePath, sqlite3.OPEN_READWRITE | sqlite3.OPEN_
   if (err) {
     console.error('Could not connect to database:', err.message)
   } else {
-    console.log('Connected to database')
-
     let sql = `
       CREATE TABLE IF NOT EXISTS files (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -23,5 +21,7 @@ let db = new sqlite3.Database(dbFilePath, sqlite3.OPEN_READWRITE | sqlite3.OPEN_
         console.log(err.message)
       }
     })
+
+    db.close()
   }
 })

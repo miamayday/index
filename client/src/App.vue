@@ -59,8 +59,11 @@ html {
   text-align: center;
 }
 #nav > * {
-  margin-right: 20px;
+  margin: 10px;
   color: inherit;
   text-decoration: none;
+}
+#nav > *:focus {
+  outline: none;
 }
 </style>

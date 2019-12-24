@@ -1,13 +1,16 @@
 <template>
-  <div :style="{ marginBottom: '20px' }">
-    <label>
+  <div id="upload">
+    <div>
       <input
         type="file"
         id="file"
         ref="file"
         v-on:change="handleFileUpload()"
       />
-    </label>
+    </div>
+    <!-- <div>
+      tags <input type="text" /> <button>Add</button>
+    </div> -->
     <button v-on:click="submitFile()">Submit</button>
   </div>
 </template>
@@ -41,4 +44,8 @@ export default {
 </script>
 
 <style>
+#upload {
+  width: 50%;
+  margin: 0 auto;
+}
 </style>
