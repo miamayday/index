@@ -1,6 +1,26 @@
+# shell
+
 ## Project setup
 ```
 chmod +x startup.sh && ./startup.sh
+```
+
+### Runs the project
+```
+./run.sh
+
+```
+
+### Resets the data
+```
+./reset.sh
+
+```
+
+### Processes pending files
+```
+./refresh.sh
+
 ```
 
 # server
