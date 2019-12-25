@@ -34,7 +34,7 @@ export default {
 
 <style>
 #search {
-  margin-bottom: 40px;
+  padding: 10px 0;
 }
 #search > * {
   margin-right: 10px;

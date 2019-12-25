@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div id="index">
     <div
       v-if="this.noFiles"
       :style="{ textAlign: 'center' }"
@@ -30,4 +30,7 @@ export default {
 </script>
 
 <style>
+#index {
+  background: var(--color-secondary);
+}
 </style>

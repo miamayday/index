@@ -1,24 +1,25 @@
 <template>
-  <div>
-    <div id="pagination" class="flex-center">
-      <a
-        v-if="this.scrollToTop"
-        @click="changePage(false); backToTop();"
-      >prev</a>
-      <a
-        v-else
-        @click="changePage(false)"
-      >prev</a>
-      <span>{{ this.getPage }}</span>
-      <a
-        v-if="this.scrollToTop"
-        @click="changePage(true); backToTop();"
-      >next</a>
-      <a
-        v-else
-        @click="changePage(true)"
-      >next</a>
-    </div>
+  <div
+    id="pagination"
+    class="flex-center"
+  >
+    <a
+      v-if="this.scrollToTop"
+      @click="changePage(false); backToTop();"
+    >prev</a>
+    <a
+      v-else
+      @click="changePage(false)"
+    >prev</a>
+    <span>{{ this.getPage }}</span>
+    <a
+      v-if="this.scrollToTop"
+      @click="changePage(true); backToTop();"
+    >next</a>
+    <a
+      v-else
+      @click="changePage(true)"
+    >next</a>
   </div>
 </template>
 
@@ -99,7 +100,8 @@ export default {
 
 <style>
 #pagination {
-  margin: 50px 0;
+  padding: 50px 0;
+  background: var(--color-secondary);
 }
 #pagination > * {
   margin-right: 20px;

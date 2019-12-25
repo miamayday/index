@@ -57,6 +57,7 @@ export default {
 <style>
 .grid {
   margin: 0 auto;
+  background: var(--color-secondary);
 }
 .grid::after {
   content: '';

@@ -19,16 +19,22 @@ export default {
 <style>
 .v-button {
   display: inline-block;
-  color: rgb(107, 190, 218);
-  border: 2px solid rgb(126, 223, 255);
+  background: var(--color-secondary);
+  color: var(--color-accent);
+  border: 2px solid var(--color-accent);
   padding: 5px;
   border-radius: 5px;
-  font-weight: bold;
   cursor: pointer;
   transition-duration: 0.1s;
 }
 .v-button:hover {
-  background-color: rgb(126, 223, 255);
+  background: var(--color-accent);
   color: white;
+}
+.v-button:focus {
+  outline: none;
+}
+.v-button::-moz-focus-inner {
+  border: 0;
 }
 </style>
