@@ -4,7 +4,7 @@ const path = require('path')
 const config = require('../config')
 const sqlite3 = require('sqlite3').verbose()
 
-let dbFilePath = path.join('..', config.paths.db)
+let dbFilePath = path.join('..', '..', config.paths.db)
 let db = new sqlite3.Database(dbFilePath, sqlite3.OPEN_READWRITE | sqlite3.OPEN_CREATE, err => {
   if (err) {
     console.error('Could not connect to database:', err.message)
