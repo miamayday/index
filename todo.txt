@@ -1,4 +1,3 @@
-dark mode
 ability to view individual files
 responsive page capacity
 tagging
