@@ -1,5 +1,6 @@
 'use-strict'
 
+const path = require('path')
 const config = require('./config')
 const AppDAO = require('./services/dao')
 
@@ -20,7 +21,7 @@ const storage = multer.diskStorage({
       tags: []
     })
 
-    cb(null, `${config.paths.uploads}/${subFolder}`)
+    cb(null, path.join(config.paths.uploads, subFolder))
   },
   filename: (req, file, cb) => {
     cb(null, file.originalname)

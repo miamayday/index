@@ -1,8 +1,9 @@
 'use-strict'
 
+const path = require('path')
 const config = require('../config')
-const fs = require('fs')
 const AppDAO = require('../services/dao')
+const fs = require('fs')
 
 const dao = new AppDAO(config.paths.db)
 
@@ -11,8 +12,8 @@ const files = fs.readdirSync(config.paths.pending)
 
 if (files.length > 0) {
   function byFirstModified(a, b) {
-    let a_target = fs.statSync(`${config.paths.pending}/${a}`).mtimeMs
-    let b_target = fs.statSync(`${config.paths.pending}/${b}`).mtimeMs
+    let a_target = fs.statSync(path.join(config.paths.pending, a)).mtimeMs
+    let b_target = fs.statSync(path.join(config.paths.pending, b)).mtimeMs
 
     if (a_target > b_target) {
       return 1
@@ -32,16 +33,19 @@ if (files.length > 0) {
     let ext = file.split('.').pop()
     let type = html5video.includes(ext) ? 'vid' : 'img'
 
-    if (fs.existsSync(`${config.paths.uploads}/${type}/${file}`)) {
+    if (fs.existsSync(path.join(config.paths.uploads, type, file))) {
       console.error(`${file} already exists`)
 
       // copy duplicate file to duplicates folder
-      fs.copyFileSync(`${config.paths.pending}/${file}`, `${config.paths.duplicates}/${file}`)
+      fs.copyFileSync(
+        path.join(config.paths.pending, file),
+        path.join(config.paths.duplicates, file)
+      )
     } else {
       // copy pending file to data folder
       fs.copyFileSync(
-        `${config.paths.pending}/${file}`,
-        `${config.paths.uploads}/${type}/${file}`
+        path.join(config.paths.pending, file),
+        path.join(config.paths.uploads, type, file)
       )
 
       // add link to sqlite3 database
@@ -55,6 +59,6 @@ if (files.length > 0) {
     }
 
     // remove pending file from file system
-    fs.unlinkSync(`${config.paths.pending}/${file}`)
+    fs.unlinkSync(path.join(config.paths.pending, file))
   }
 }

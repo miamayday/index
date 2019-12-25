@@ -20,6 +20,9 @@ export const store = new Vuex.Store({
       console.log('received', files.length, 'files')
       state.files = files
     },
+    addFile(state, file) {
+      state.files = state.files.concat(file)
+    },
     updateFilter(state, filter) {
       state.filter = filter
     },

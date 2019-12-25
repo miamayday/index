@@ -55,13 +55,23 @@ export default {
         let formData = new FormData()
         formData.append('file', this.file)
 
-        axios.post('http://localhost:8081/upload', formData, {
-          headers: {
-            'Content-Type': 'multipart/form-data'
-          }
-        }).then((response) => {
-          this.file = ''
-        })
+        axios
+          .post('http://localhost:8081/upload', formData, {
+            headers: {
+              'Content-Type': 'multipart/form-data'
+            }
+          })
+          .then(response => {
+            let file = response.data.file
+            let subFolder = file.mimetype.includes('image') ? 'img' : 'vid'
+            let fileObj = {
+              name: file.originalname,
+              type: subFolder,
+              tags: []
+            }
+            this.$store.commit('addFile', fileObj)
+            this.file = ''
+          })
       }
     }
   }

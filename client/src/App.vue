@@ -82,6 +82,16 @@ body {
   height: 100%;
   width: 100%;
 }
+html {
+  font-size: 12px;
+  font-family: 'Roboto', sans-serif;
+}
+a {
+  text-decoration: none;
+}
+a:focus {
+  outline: none;
+}
 .theme-light {
   --color-primary: #0060df;
   --color-secondary: #fbfbfe;
@@ -95,16 +105,6 @@ body {
   --color-accent: #3393a1;
   --font-color: #a9a9a9;
   --border-color: #363636;
-}
-html {
-  font-size: 12px;
-  font-family: 'Roboto', sans-serif;
-}
-a {
-  text-decoration: none;
-}
-a:focus {
-  outline: none;
 }
 #app {
   width: 100%;

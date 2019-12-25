@@ -23,11 +23,6 @@ export default {
   name: 'gallery',
   mixins: [myMixin],
   components: { Card },
-  mounted() {
-    const columns = this.nofColumns()
-    const capacity = this.$store.getters.capacity
-    // fix capacity issue...
-  },
   computed: {
     files() {
       const files = this.$store.getters.files
@@ -44,7 +39,7 @@ export default {
       try {
         return require(`./../../../data/uploads/${file.type}/${file.name}`)
       } catch (e) {
-        console.error(e.message)
+        // console.log(e.message)
       }
     },
     onClickTag(value) {
