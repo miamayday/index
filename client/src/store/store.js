@@ -12,7 +12,8 @@ export const store = new Vuex.Store({
       capacity: 12,
       start: 0,
       end: 12
-    }
+    },
+    playingVideo: null
   },
   mutations: {
     initFiles(state, files) {
@@ -30,6 +31,9 @@ export const store = new Vuex.Store({
     },
     setEnd(state, end) {
       state.pagination.end = end
+    },
+    setPlayingVideo(state, playingVideo) {
+      state.playingVideo = playingVideo
     }
   },
   getters: {
@@ -38,6 +42,7 @@ export const store = new Vuex.Store({
     page: state => state.pagination.page,
     capacity: state => state.pagination.capacity,
     start: state => state.pagination.start,
-    end: state => state.pagination.end
+    end: state => state.pagination.end,
+    playingVideo: state => state.playingVideo
   }
 })

@@ -1,16 +1,19 @@
 <template>
-  <div id="search">
+  <div id="search" class="flex-center">
     <input
       v-model="filter"
       placeholder="search for pix"
     />
-    <button @click="filter=''">reset</button>
+    <v-button :onClick="resetFilter">reset</v-button>
   </div>
 </template>
 
 <script>
+import Button from '@/components/Button'
+
 export default {
   name: 'search',
+  components: { 'v-button': Button },
   computed: {
     filter: {
       get() {
@@ -20,14 +23,17 @@ export default {
         this.$store.commit('updateFilter', value)
       }
     }
+  },
+  methods: {
+    resetFilter() {
+      this.filter = ''
+    }
   }
 }
 </script>
 
 <style>
 #search {
-  display: flex;
-  justify-content: center;
   margin-bottom: 40px;
 }
 #search > * {

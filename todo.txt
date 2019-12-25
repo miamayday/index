@@ -1,6 +1,5 @@
 dark mode
 ability to view individual files
-video pauses when clicking outside its area
 responsive page capacity
 tagging
 search request processor combining tags, type, and format

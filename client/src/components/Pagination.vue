@@ -1,22 +1,22 @@
 <template>
   <div>
-    <div id="pagination">
+    <div id="pagination" class="flex-center">
       <a
         v-if="this.scrollToTop"
-        @click="decrementPage(); backToTop();"
+        @click="changePage(false); backToTop();"
       >prev</a>
       <a
         v-else
-        @click="decrementPage()"
+        @click="changePage(false)"
       >prev</a>
       <span>{{ this.getPage }}</span>
       <a
         v-if="this.scrollToTop"
-        @click="incrementPage(); backToTop();"
+        @click="changePage(true); backToTop();"
       >next</a>
       <a
         v-else
-        @click="incrementPage()"
+        @click="changePage(true)"
       >next</a>
     </div>
   </div>
@@ -35,16 +35,32 @@ export default {
     backToTop() {
       window.scrollTo(0, 0)
     },
-    incrementPage() {
+    changePage(increment) {
       const nofFiles = this.$store.getters.files.length
       const page = this.$store.getters.page
       const capacity = this.$store.getters.capacity
       const lastPage = Math.ceil(nofFiles / capacity)
 
+      let params = {
+        nofFiles,
+        page,
+        capacity,
+        lastPage
+      }
+
+      if (increment) {
+        this.incrementPage(params)
+      } else {
+        this.decrementPage(params)
+      }
+    },
+    incrementPage(params) {
+      const { nofFiles, page, capacity, lastPage } = params
+
       let start = (page - 1) * capacity
       let end = start + capacity
 
-      if (this.page === lastPage - 1) {
+      if (page === lastPage - 1) {
         start += capacity
         end = nofFiles
         this.$store.commit('setPage', page + 1)
@@ -57,11 +73,8 @@ export default {
       this.$store.commit('setStart', start)
       this.$store.commit('setEnd', end)
     },
-    decrementPage() {
-      const nofFiles = this.$store.getters.files.length
-      const page = this.$store.getters.page
-      const capacity = this.$store.getters.capacity
-      const lastPage = Math.ceil(nofFiles / this.capacity)
+    decrementPage(params) {
+      const { nofFiles, page, capacity, lastPage } = params
 
       let start = (page - 1) * capacity
       let end = start + capacity
@@ -87,7 +100,6 @@ export default {
 <style>
 #pagination {
   margin: 50px 0;
-  text-align: center;
 }
 #pagination > * {
   margin-right: 20px;

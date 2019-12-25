@@ -14,8 +14,13 @@ export default {
       // })
     },
     nofColumns() {
-      const gridTemplateColumns = $('.grid').css('grid-template-columns')
-      return gridTemplateColumns.split(' ').length
+      const windowWidth = $(window).width()
+      if (windowWidth < 1100) {
+        return 3
+      } else {
+        const gridTemplateColumns = $('.grid').css('grid-template-columns')
+        return gridTemplateColumns.split(' ').length
+      }
     }
   }
 }

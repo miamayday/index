@@ -6,6 +6,7 @@
     />
     <video
       v-else
+      :id="this.file.id + '_vid'"
       ref="video"
       @click="playVideo()"
     >
@@ -39,8 +40,12 @@ export default {
     playVideo() {
       let video = this.$refs.video
       if (!video.looped) video.loop = true
-      if (video.paused) video.play()
-      else video.pause()
+      if (video.paused) {
+        video.play()
+        this.$store.commit('setPlayingVideo', video)
+      } else {
+        video.pause()
+      }
     }
   }
 }
