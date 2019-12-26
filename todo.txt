@@ -4,3 +4,4 @@ tagging
 search request processor combining tags, type, and format
 automatic tagger script (python?)
 error handling for invalid files
+cross-platform startup

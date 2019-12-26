@@ -31,13 +31,13 @@ export default {
   components: { 'v-button': Button },
   data() {
     return {
-      mode: 'light mode'
+      mode: 'dark mode'
     }
   },
   mounted() {
     if (localStorage.getItem('index-theme') === 'theme-dark') {
       $('#app').toggleClass('theme-light theme-dark')
-      this.mode = 'dark mode'
+      this.mode = 'light mode'
     }
 
     axios.get('http://localhost:8081/files').then(response => {
@@ -49,20 +49,21 @@ export default {
   methods: {
     onClick(event) {
       let playingVideo = this.$store.getters.playingVideo
+      console.log(playingVideo, 'VS', event.target)
       if (playingVideo && event.target.id !== playingVideo.id) {
         playingVideo.pause()
         this.$store.commit('setPlayingVideo', null)
       }
     },
     toggleMode() {
-      if (this.mode === 'light mode') {
+      if (this.mode === 'dark mode') {
         $('#app').toggleClass('theme-light theme-dark')
         localStorage.setItem('index-theme', 'theme-dark')
-        this.mode = 'dark mode'
+        this.mode = 'light mode'
       } else {
         $('#app').toggleClass('theme-dark theme-light')
         localStorage.setItem('index-theme', 'theme-light')
-        this.mode = 'light mode'
+        this.mode = 'dark mode'
       }
     }
   },

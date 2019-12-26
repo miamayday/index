@@ -70,7 +70,7 @@ export default {
 }
 @media only screen and (max-width: 1100px) {
   .grid {
-    width: 100%;
+    padding: 0 5px;
   }
   .grid-item-container {
     padding-bottom: calc(100% / 3);

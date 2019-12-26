@@ -1,5 +1,8 @@
 <template>
-  <div class="v-button" @click="onClick">
+  <div
+    class="v-button"
+    @click="onClick"
+  >
     <slot></slot>
   </div>
 </template>
@@ -22,6 +25,8 @@ export default {
   background: var(--color-secondary);
   color: var(--color-accent);
   border: 2px solid var(--color-accent);
+  min-width: 30px;
+  text-align: center;
   padding: 5px;
   border-radius: 5px;
   cursor: pointer;

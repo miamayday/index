@@ -63,13 +63,15 @@ export default {
           })
           .then(response => {
             let file = response.data.file
-            let subFolder = file.mimetype.includes('image') ? 'img' : 'vid'
-            let fileObj = {
-              name: file.originalname,
-              type: subFolder,
-              tags: []
+            if (file) {
+              let subFolder = file.mimetype.includes('image') ? 'img' : 'vid'
+              let fileObj = {
+                name: file.originalname,
+                type: subFolder,
+                tags: []
+              }
+              this.$store.commit('addFile', fileObj)
             }
-            this.$store.commit('addFile', fileObj)
             this.file = ''
           })
       }
