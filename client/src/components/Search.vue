@@ -1,7 +1,7 @@
 <template>
   <div id="search" class="flex-center">
     <input
-      v-model="this.filter"
+      v-model="filter"
       placeholder="search for pix"
     />
     <v-button :onClick="resetFilter">reset</v-button>
@@ -20,7 +20,7 @@ export default {
         return this.$store.getters.filter
       },
       set(value) {
-        this.$store.commit('updateFilter', value)
+        this.$store.commit('setFilter', value)
       }
     }
   },

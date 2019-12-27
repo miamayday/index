@@ -26,12 +26,30 @@ export default {
   computed: {
     files() {
       const files = this.$store.getters.files
+      const filter = this.$store.getters.filter
+
+      let results = files
+
+      if (filter !== '') {
+        const filters = filter.split(',').filter(f => f !== '')
+        results = []
+
+        for (const filter of filters) {
+          const result = files.filter(f =>
+            (f.tags.join('') + f.type)
+              .toLowerCase()
+              .includes(filter.toLowerCase())
+          )
+          results = results.concat.apply([], result)
+        }
+      }
+
       const start = this.$store.getters.start
       const end = this.$store.getters.end
 
       console.log('from', start, 'to', end)
 
-      return files.slice(start, end)
+      return results.slice(start, end)
     }
   },
   methods: {

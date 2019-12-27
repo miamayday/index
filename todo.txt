@@ -4,3 +4,5 @@ automatic tagger script (python?)
 error handling for invalid files
 cross-platform startup
 preview for video
+ability to delete tags in preview
+mobile preview

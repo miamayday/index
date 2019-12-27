@@ -28,7 +28,7 @@ export const store = new Vuex.Store({
     addFile(state, file) {
       state.files = state.files.concat(file)
     },
-    updateFilter(state, filter) {
+    setFilter(state, filter) {
       state.filter = filter
     },
     setPage(state, page) {
