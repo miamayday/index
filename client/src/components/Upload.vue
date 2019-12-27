@@ -113,7 +113,7 @@ export default {
   color: white;
 }
 .overflow {
-  max-width: 150px;
+  max-width: 100%;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;

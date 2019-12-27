@@ -1,7 +1,7 @@
 <template>
   <div id="search" class="flex-center">
     <input
-      v-model="filter"
+      v-model="this.filter"
       placeholder="search for pix"
     />
     <v-button :onClick="resetFilter">reset</v-button>

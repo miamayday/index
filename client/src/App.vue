@@ -35,25 +35,37 @@ export default {
     }
   },
   mounted() {
+    // config
     if (localStorage.getItem('index-theme') === 'theme-dark') {
       $('#app').toggleClass('theme-light theme-dark')
       this.mode = 'light mode'
     }
 
+    // fetch files
     axios.get('http://localhost:8081/files').then(response => {
       this.$store.commit('initFiles', response.data)
     })
 
+    // listeners
     window.addEventListener('click', this.onClick)
+    window.addEventListener('mousemove', this.onMouseMove)
+    window.addEventListener('resize', this.onResize)
   },
   methods: {
     onClick(event) {
       let playingVideo = this.$store.getters.playingVideo
-      console.log(playingVideo, 'VS', event.target)
       if (playingVideo && event.target.id !== playingVideo.id) {
         playingVideo.pause()
         this.$store.commit('setPlayingVideo', null)
       }
+    },
+    onMouseMove(event) {
+      let x = event.clientX
+      let y = event.clientY
+      this.$store.commit('setMousePos', { x, y })
+    },
+    onResize(event) {
+      // this.fitPreview()
     },
     toggleMode() {
       if (this.mode === 'dark mode') {
@@ -69,6 +81,8 @@ export default {
   },
   beforeDestroy() {
     window.removeEventListener('click', this.onClick)
+    window.removeEventListener('mousemove', this.onMouseMove)
+    window.removeEventListener('resize', this.onMouseMove)
   }
 }
 </script>
@@ -101,7 +115,7 @@ a:focus {
   --border-color: #cacaca;
 }
 .theme-dark {
-  --color-primary: #17ed90;
+  --color-primary: #41ad7f;
   --color-secondary: #121212;
   --color-accent: #3393a1;
   --font-color: #a9a9a9;

@@ -1,26 +1,31 @@
 <template>
   <transition name="modal">
-    <div class="modal-mask">
-      <div
-        class="modal-wrapper"
-        @click="() => $emit('close')"
-      >
-        <div class="modal-container">
-          <div class="modal-header">
-            <slot name="header">default header</slot>
+    <div
+      class="modal-mask"
+      @click="closeModal()"
+    >
+      <div class="modal-wrapper">
+        <div
+          class="modal-container"
+          @mouseover="() => this.canClose = false"
+          @mouseleave="() => this.canClose = true"
+        >
+          <div class="modal-banner">
+            <img :src="this.path" />
           </div>
 
-          <!-- <slot></slot> -->
+          <div class="modal-content">
+            <div class="modal-title">
+              <slot name="title">default title</slot>
+            </div>
 
-          <div class="modal-body">
-            <slot name="body">default body</slot>
-          </div>
+            <div class="modal-body">
+              <slot name="body">default body</slot>
+            </div>
 
-          <div class="modal-footer">
-            <slot name="footer">
-              default footer
-              <v-button :onClick="() => $emit('close')">OK</v-button>
-            </slot>
+            <!-- <div class="modal-footer">
+              <slot name="footer">default footer</slot>
+            </div> -->
           </div>
         </div>
       </div>
@@ -29,11 +34,39 @@
 </template>
 
 <script>
+import JQuery from 'jquery'
+import myMixin from '@/mixins/myMixin'
 import Button from '@/components/Button'
+
+const $ = JQuery
 
 export default {
   name: 'modal',
-  components: { 'v-button': Button }
+  mixins: [myMixin],
+  props: ['path'],
+  components: { 'v-button': Button },
+  data() {
+    return {
+      canClose: false
+    }
+  },
+  mounted() {
+    // this.fitPreview()
+
+    let { x, y } = this.$store.getters.mousePos
+    let el = document.elementFromPoint(x, y)
+    let cont = $('.modal-container')
+    if (el !== cont) {
+      this.canClose = true
+    }
+  },
+  methods: {
+    closeModal() {
+      if (this.canClose) {
+        this.$emit('close')
+      }
+    }
+  }
 }
 </script>
 
@@ -50,30 +83,52 @@ export default {
   transition: opacity 0.3s ease;
 }
 .modal-wrapper {
-  display: table-cell;
-  vertical-align: middle;
+  margin: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 2px;
+  background: rgba(255, 255, 255, 0.1);
+  padding: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  max-width: 500px;
+  max-height: 80%;
+  overflow-y: auto;
 }
 .modal-container {
-  width: 500px;
-  margin: 0px auto;
-  padding: 20px 30px;
-  background-color: var(--color-secondary);
+  background: var(--color-secondary);
   border-radius: 2px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.33);
   transition: all 0.3s ease;
-  font-family: Helvetica, Arial, sans-serif;
-}
-.modal-header h3 {
-  margin-top: 0;
-  color: #42b983;
-}
-.modal-body {
-  margin: 20px 0;
-}
-.modal-footer {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  max-width: 100%;
+  max-height: 100%;
+}
+.modal-banner {
+  margin: 0 auto;
+  max-width: 100%;
+  max-height: 100%;
+}
+.modal-banner img {
+  display: block;
+  max-width: 100%;
+  max-height: 100%;
+  min-width: 0;
+  min-height: 0;
+}
+.modal-content {
+  padding: 10px;
+}
+.modal-title {
+  color: var(--color-primary);
+  font-weight: bold;
+  margin-bottom: 15px;
 }
 
 /*

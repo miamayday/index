@@ -15,7 +15,7 @@ const storage = multer.diskStorage({
     const subFolder = file.mimetype.includes('image') ? 'img' : 'vid'
 
     // add link to sqlite3 database
-    dao.addFile({
+    dao.add({
       name: file.originalname,
       type: subFolder,
       tags: []
@@ -44,16 +44,44 @@ app.use(bodyParser.json())
 app.use(cors())
 
 app.get('/files', (req, res) => {
-  dao.getFiles().then(result => {
-    res.send(result)
-  }, err => {
-    console.log(err.message)
-    res.send([])
-  })
+  dao.getAll().then(
+    result => {
+      res.send(result)
+    },
+    err => {
+      console.log(err.message)
+      res.send(err)
+    }
+  )
+})
+
+app.get('/files/:id', (req, res) => {
+  dao.get(req.params.id).then(
+    result => {
+      if (result === undefined) {
+        res.status(404).send('Not found')
+      } else {
+        res.send(result)
+      }
+    },
+    err => {
+      console.log(err.message)
+      res.send(err)
+    }
+  )
 })
 
 app.post('/upload', upload.single('file'), (req, res) => {
   res.json({ file: req.file })
+})
+
+app.put('/files/:id', (req, res) => {
+  const id = req.params.id
+  const file = req.body
+
+  dao.update(id, file)
+
+  res.json({ file })
 })
 
 app.listen(process.env.PORT || 8081)

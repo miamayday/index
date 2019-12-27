@@ -13,7 +13,12 @@ export const store = new Vuex.Store({
       start: 0,
       end: 12
     },
-    playingVideo: null
+    playingVideo: null,
+    clickedEl: null,
+    mousePos: {
+      x: 0,
+      y: 0
+    }
   },
   mutations: {
     initFiles(state, files) {
@@ -37,6 +42,12 @@ export const store = new Vuex.Store({
     },
     setPlayingVideo(state, playingVideo) {
       state.playingVideo = playingVideo
+    },
+    setClickedEl(state, clickedEl) {
+      state.clickedEl = clickedEl
+    },
+    setMousePos(state, mousePos) {
+      state.mousePos = mousePos
     }
   },
   getters: {
@@ -46,6 +57,8 @@ export const store = new Vuex.Store({
     capacity: state => state.pagination.capacity,
     start: state => state.pagination.start,
     end: state => state.pagination.end,
-    playingVideo: state => state.playingVideo
+    playingVideo: state => state.playingVideo,
+    clickedEl: state => state.clickedEl,
+    mousePos: state => state.mousePos
   }
 })

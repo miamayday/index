@@ -2,8 +2,8 @@
   <div class="card">
     <img
       v-if="file.type == 'img'"
-      :src="path"
-      @click="togglePreview()"
+      :src="this.path"
+      @click="showPreview()"
     />
     <video
       v-else
@@ -24,20 +24,33 @@
     >{{ tag }}</a>-->
     <modal
       v-if="this.onPreview"
-      @close="togglePreview()"
+      :path="this.path"
+      @close="closePreview()"
     >
-      <div slot="header">{{ this.file.name }}</div>
-      <img
-        v-if="file.type == 'img'"
-        slot="body"
-        :src="path"
-        @click="togglePreview()"
-      />
+      <div slot="title">{{ this.file.name }}</div>
+      <div slot="body">
+        <form @submit="onSubmit">
+          <input
+            v-model="tag"
+            placeholder="add tags"
+          />
+        </form>
+        <div
+          v-if="this.file.tags.length > 0"
+          id="tags"
+        >
+          <span
+            v-for="tag in this.file.tags"
+            :key="tag"
+          >{{ tag }}</span>
+        </div>
+      </div>
     </modal>
   </div>
 </template>
 
 <script>
+import axios from 'axios'
 import Modal from '@/components/Modal'
 
 export default {
@@ -49,7 +62,8 @@ export default {
   components: { Modal },
   data() {
     return {
-      onPreview: false
+      onPreview: false,
+      tag: ''
     }
   },
   methods: {
@@ -66,8 +80,21 @@ export default {
         video.pause()
       }
     },
-    togglePreview() {
-      this.onPreview = !this.onPreview
+    showPreview() {
+      this.onPreview = true
+    },
+    closePreview() {
+      this.onPreview = false
+    },
+    onSubmit(event) {
+      event.preventDefault()
+      let index = this.file.tags.indexOf(this.tag)
+      if (index === -1) {
+        console.log(this.file.tags)
+        this.file.tags = this.file.tags.concat(this.tag)
+        axios.put(`http://localhost:8081/files/${this.file.id}`, this.file)
+      }
+      this.tag = ''
     }
   }
 }
@@ -108,7 +135,13 @@ a:hover {
 .card video:focus {
   outline: none;
 }
-.preview {
-  z-index: 9999;
+#tags {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  margin-top: 10px;
+}
+#tags > * {
+  margin: 0 10px;
 }
 </style>
