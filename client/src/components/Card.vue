@@ -42,6 +42,7 @@
           <span
             v-for="tag in this.file.tags"
             :key="tag"
+            @click="searchBy(tag)"
           >{{ tag }}</span>
         </div>
       </div>
@@ -95,6 +96,10 @@ export default {
         axios.put(`http://localhost:8081/files/${this.file.id}`, this.file)
       }
       this.tag = ''
+    },
+    searchBy(key) {
+      this.closePreview()
+      this.$store.commit('setFilter', key)
     }
   }
 }
@@ -143,5 +148,6 @@ a:hover {
 }
 #tags > * {
   margin: 0 10px;
+  cursor: pointer;
 }
 </style>

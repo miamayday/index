@@ -51,8 +51,6 @@ export default {
     }
   },
   mounted() {
-    // this.fitPreview()
-
     let { x, y } = this.$store.getters.mousePos
     let el = document.elementFromPoint(x, y)
     let cont = $('.modal-container')
@@ -124,6 +122,12 @@ export default {
 }
 .modal-content {
   padding: 10px;
+}
+.modal-content input {
+  border: 0;
+  border-radius: 0;
+  padding: 0;
+  border-bottom: 1px solid var(--border-color);
 }
 .modal-title {
   color: var(--color-primary);

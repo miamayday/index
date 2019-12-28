@@ -108,10 +108,10 @@ a:focus {
   outline: none;
 }
 .theme-light {
-  --color-primary: #0060df;
-  --color-secondary: #fbfbfe;
-  --color-accent: #f07e68;
-  --font-color: #292929;
+  --color-primary: #8075e0;
+  --color-secondary: #ffffff;
+  --color-accent: #e68494;
+  --font-color: #3f3f3f;
   --border-color: #cacaca;
 }
 .theme-dark {
@@ -131,8 +131,10 @@ input {
   background: var(--color-secondary);
   color: var(--font-color);
   border: 1px solid var(--border-color);
-  border-radius: 5px;
+  border-radius: 20px;
   padding: 10px;
+  font-size: 12px;
+  outline: none;
 }
 #nav {
   padding: 10px 0;
@@ -141,7 +143,7 @@ input {
   margin: 10px;
 }
 #nav > a {
-  color: inherit;
+  font-weight: bold;
 }
 .flex-center {
   display: flex;

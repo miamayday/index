@@ -36,7 +36,8 @@ export default {
 
         for (const filter of filters) {
           const result = files.filter(f =>
-            (f.tags.join('') + f.type)
+            f.tags
+              .join('')
               .toLowerCase()
               .includes(filter.toLowerCase())
           )
