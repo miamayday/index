@@ -99,7 +99,7 @@ export default {
 }
 [type='file'] + label {
   display: inline-block;
-  background: var(--color-secondary);
+  background-color: var(--color-secondary);
   color: var(--color-accent);
   border: 2px solid var(--color-accent);
   padding: 5px;
@@ -109,7 +109,7 @@ export default {
 }
 [type='file']:focus + label,
 [type='file'] + label:hover {
-  background: var(--color-accent);
+  background-color: var(--color-accent);
   color: white;
 }
 .overflow {

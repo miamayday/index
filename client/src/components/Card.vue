@@ -106,14 +106,6 @@ export default {
 </script>
 
 <style>
-a {
-  color: rgb(153, 153, 153);
-  margin-right: 10px;
-}
-a:hover {
-  color: rgb(116, 116, 116);
-  cursor: pointer;
-}
 .card {
   display: block;
   overflow-wrap: break-word;

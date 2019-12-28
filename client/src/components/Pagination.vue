@@ -101,7 +101,7 @@ export default {
 <style>
 #pagination {
   padding: 50px 0;
-  background: var(--color-secondary);
+  background-color: var(--color-secondary);
 }
 #pagination > * {
   margin-right: 20px;

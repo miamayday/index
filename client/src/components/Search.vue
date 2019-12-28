@@ -1,19 +1,14 @@
 <template>
-  <div
-    id="search"
-    class="flex-center"
-  >
-    <form>
-      <input
-        v-model="filter"
-        placeholder="search for pix"
-      />
-      <div
-        id="reset"
-        @click="() => filter = ''"
-      >x</div>
-    </form>
-  </div>
+  <form id="search">
+    <input
+      v-model="filter"
+      placeholder="search for pix"
+    />
+    <div
+      id="reset"
+      @click="() => filter = ''"
+    ></div>
+  </form>
 </template>
 
 <script>
@@ -38,22 +33,26 @@ export default {
 <style>
 #search {
   padding: 10px 0;
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+#reset input {
+  position: absolute;
+  margin-right: 20px;
 }
 #reset {
   position: relative;
   display: inline-block;
-  width: 10px;
-  height: 10px;
-  right: 18px;
+  right: 25px;
   cursor: pointer;
   color: var(--color-accent);
 }
 #reset:after {
-  content: '';
-  display: block;
-  width: 20px;
-  height: 20px;
+  content: 'x';
   position: absolute;
+  padding: 5px;
   top: 50%;
   transform: translateY(-50%);
   z-index: 1;

@@ -68,15 +68,19 @@ export default {
       // this.fitPreview()
     },
     toggleMode() {
+      console.log('toggle mode')
       if (this.mode === 'dark mode') {
+        console.log('to light')
         $('#app').toggleClass('theme-light theme-dark')
         localStorage.setItem('index-theme', 'theme-dark')
         this.mode = 'light mode'
       } else {
+        console.log('to dark')
         $('#app').toggleClass('theme-dark theme-light')
         localStorage.setItem('index-theme', 'theme-light')
         this.mode = 'dark mode'
       }
+      console.log($('#app'))
     }
   },
   beforeDestroy() {
@@ -124,11 +128,11 @@ a:focus {
 #app {
   width: 100%;
   height: 100%;
-  background: var(--color-secondary);
+  background-color: var(--color-secondary);
   color: var(--font-color);
 }
 input {
-  background: var(--color-secondary);
+  background-color: var(--color-secondary);
   color: var(--font-color);
   border: 1px solid var(--border-color);
   border-radius: 20px;
@@ -144,6 +148,7 @@ input {
 }
 #nav > a {
   font-weight: bold;
+  color: inherit;
 }
 .flex-center {
   display: flex;

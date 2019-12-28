@@ -22,7 +22,7 @@ export default {
 <style>
 .v-button {
   display: inline-block;
-  background: var(--color-secondary);
+  background-color: var(--color-secondary);
   color: var(--color-accent);
   border: 2px solid var(--color-accent);
   min-width: 30px;
@@ -33,7 +33,7 @@ export default {
   transition-duration: 0.1s;
 }
 .v-button:hover {
-  background: var(--color-accent);
+  background-color: var(--color-accent);
   color: white;
 }
 .v-button:focus {

@@ -127,6 +127,8 @@ export default {
   border: 0;
   border-radius: 0;
   padding: 0;
+  padding-bottom: 2px;
+  padding-left: 2px;
   border-bottom: 1px solid var(--border-color);
 }
 .modal-title {

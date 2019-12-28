@@ -31,6 +31,6 @@ export default {
 
 <style>
 #index {
-  background: var(--color-secondary);
+  background-color: var(--color-secondary);
 }
 </style>
