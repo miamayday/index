@@ -5,12 +5,12 @@
       v-for="file in files"
       :key="file.id"
     >
-      <card
-        class="grid-item"
-        :path="getPath(file)"
-        :file="file"
-        @searchBy="onClickTag"
-      />
+      <div class="grid-item">
+        <card
+          :path="getPath(file)"
+          :file="file"
+        />
+      </div>
     </div>
   </div>
 </template>
@@ -23,6 +23,12 @@ export default {
   name: 'gallery',
   mixins: [myMixin],
   components: { Card },
+  mounted() {
+    const nofColumns = this.nofColumns()
+    const capacity = 3 * nofColumns
+    this.$store.commit('setCapacity', capacity)
+    this.$store.commit('setEnd', capacity)
+  },
   computed: {
     files() {
       const files = this.$store.getters.files
@@ -55,14 +61,7 @@ export default {
   },
   methods: {
     getPath(file) {
-      try {
-        return require(`./../../../data/uploads/${file.type}/${file.name}`)
-      } catch (e) {
-        // console.log(e.message)
-      }
-    },
-    onClickTag(value) {
-      this.filter = value
+      return require(`./../../../data/uploads/${file.type}/${file.name}`)
     }
   }
 }
@@ -70,10 +69,35 @@ export default {
 
 <style>
 .grid {
-  margin: 0 auto;
+  margin: 0 100px;
   background-color: var(--color-secondary);
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  grid-gap: 40px;
 }
-.grid::after {
+.grid-item-container {
+  width: 100%;
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+}
+.grid-item {
+  position: relative;
+  content: '';
+  display: block;
+  height: 0;
+  width: 0;
+  padding-bottom: 100%;
+  width: 100%;
+}
+/* .grid-item {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: violet;
+} */
+/* .grid::after {
   content: '';
   display: block;
   clear: both;
@@ -116,5 +140,5 @@ export default {
     bottom: 0;
     right: 0;
   }
-}
+} */
 </style>

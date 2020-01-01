@@ -34,6 +34,9 @@ export const store = new Vuex.Store({
     setPage(state, page) {
       state.pagination.page = page
     },
+    setCapacity(state, capacity) {
+      state.pagination.capacity = capacity
+    },
     setStart(state, start) {
       state.pagination.start = start
     },

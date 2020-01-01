@@ -1,27 +1,43 @@
 <template>
   <div class="card">
-    <img
-      v-if="file.type == 'img'"
-      :src="this.path"
-      @click="showPreview()"
-    />
-    <video
-      v-else
-      :id="this.file.id + '_vid'"
-      ref="video"
-      @click="playVideo()"
+    <div
+      v-if="this.file.type == 'img'"
+      class="card-banner"
     >
-      <source
-        :src="path"
-        :type="`video/${file.name.split('.').pop()}`"
-      />
-    </video>
-    <!-- <div>{{ file.name }}</div>
-    <a
-      v-for="tag in file.tags"
-      :key="tag"
-      @click="$emit('searchBy', tag)"
-    >{{ tag }}</a>-->
+      <div class="card-banner-item">
+        <img
+          :src="this.path"
+          @click="showPreview()"
+        />
+      </div>
+    </div>
+    <div
+      v-else
+      class="card-banner"
+    >
+      <div class="card-banner-item">
+        <video
+          :id="this.file.id + '_vid'"
+          ref="video"
+          @click="playVideo()"
+        >
+          <source
+            :src="path"
+            :type="`video/${this.file.name.split('.').pop()}`"
+          />
+        </video>
+      </div>
+    </div>
+
+    <!-- <div class="card-banner"></div> -->
+
+    <div class="card-content">
+      <div class="card-title">{{ this.file.name }}</div>
+    </div>
+
+    <!-- <div id="top">top</div>
+    <div id="bottom">bottom</div>-->
+
     <modal
       v-if="this.onPreview"
       :path="this.path"
@@ -105,32 +121,58 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 .card {
-  display: block;
-  overflow-wrap: break-word;
-  font-style: italic;
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  min-width: 100%;
+  width: 100%;
+  max-width: 100%;
+  min-height: 100%;
+  height: 100%;
+  max-height: 100%;
 }
-.card:hover {
-  cursor: default;
+.card-banner {
+  flex: 1;
+  border-bottom-width: 1px;
+  border-bottom-style: solid;
+  border-bottom-color: var(--border-color);
 }
-.card img {
+.card-banner-item {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+.card-banner img {
+  position: absolute;
   width: 100%;
   max-height: 100%;
-  height: 100%;
   object-fit: cover;
+  border-top-left-radius: 12px;
+  border-top-right-radius: 12px;
 }
-.card img:focus {
-  outline: none;
-}
-.card video {
+.card-banner video {
+  position: absolute;
   width: 100%;
   max-height: 100%;
-  height: 100%;
   object-fit: cover;
+  border-top-left-radius: 12px;
+  border-top-right-radius: 12px;
 }
-.card video:focus {
-  outline: none;
+.card-content {
+  display: flex;
+  align-items: center;
+  padding: 0 15px;
+  height: 40px;
+}
+.card-title {
+  display: inline-block;
+  vertical-align: middle;
+  width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 #tags {
   display: flex;

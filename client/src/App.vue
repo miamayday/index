@@ -65,7 +65,10 @@ export default {
       this.$store.commit('setMousePos', { x, y })
     },
     onResize(event) {
-      // this.fitPreview()
+      const nofColumns = this.nofColumns()
+      const capacity = 3 * nofColumns
+      this.$store.commit('setCapacity', capacity)
+      this.$store.commit('setEnd', capacity)
     },
     toggleMode() {
       console.log('toggle mode')

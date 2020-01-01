@@ -86,10 +86,8 @@ export default {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  border: 1px solid var(--border-color);
   border-radius: 2px;
-  background: rgba(255, 255, 255, 0.1);
-  padding: 30px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -122,6 +120,7 @@ export default {
 }
 .modal-content {
   padding: 10px;
+  border-top: 1px solid var(--border-color);
 }
 .modal-content input {
   border: 0;
