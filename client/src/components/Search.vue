@@ -4,7 +4,7 @@
       v-model="filter"
       placeholder="search for pix"
     />
-    <div
+    <div v-if="filter.length > 0"
       id="reset"
       @click="() => filter = ''"
     ></div>

@@ -93,7 +93,7 @@ export default {
       if (index === -1) {
         console.log(this.file.tags)
         this.file.tags = this.file.tags.concat(this.tag)
-        axios.put(`http://localhost:8081/files/${this.file.id}`, this.file)
+        axios.put(`http://localhost:8081/api/files/${this.file.id}`, this.file)
       }
       this.tag = ''
     },

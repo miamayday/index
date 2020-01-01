@@ -42,7 +42,7 @@ export default {
     }
 
     // fetch files
-    axios.get('http://localhost:8081/files').then(response => {
+    axios.get('http://localhost:8081/api/files').then(response => {
       this.$store.commit('initFiles', response.data)
     })
 
