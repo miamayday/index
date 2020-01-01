@@ -29,14 +29,15 @@
       </div>
     </div>
 
-    <!-- <div class="card-banner"></div> -->
-
     <div class="card-content">
+      <div
+        v-if="this.file.type === 'vid'"
+        class="card-icon"
+      >
+        <img src="@/film.png" />
+      </div>
       <div class="card-title">{{ this.file.name }}</div>
     </div>
-
-    <!-- <div id="top">top</div>
-    <div id="bottom">bottom</div>-->
 
     <modal
       v-if="this.onPreview"
@@ -160,11 +161,25 @@ export default {
   border-top-left-radius: 12px;
   border-top-right-radius: 12px;
 }
+.video-icon {
+  padding: 10px;
+}
+.video-icon img {
+  width: 30px;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
 .card-content {
   display: flex;
   align-items: center;
-  padding: 0 15px;
+  padding: 0 10px;
   height: 40px;
+}
+.card-icon {
+  margin-right: 10px;
+}
+.card-icon img {
+  height: 20px;
 }
 .card-title {
   display: inline-block;
