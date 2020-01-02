@@ -54,7 +54,7 @@
       <div slot="body">
         <form @submit="onSubmit">
           <input
-            v-model="tag"
+            v-model="newTag"
             placeholder="add tags"
           />
         </form>
@@ -62,11 +62,22 @@
           v-if="this.file.tags.length > 0"
           id="tags"
         >
-          <span
+          <div
             v-for="tag in this.file.tags"
             :key="tag"
+            @mouseover="overTag = tag"
+            @mouseleave="overTag = ''"
             @click="searchBy(tag)"
-          >{{ tag }}</span>
+          >
+            <span class="tag">{{ tag }}</span>
+            <span
+              v-if="overTag === tag"
+              class="remove-tag"
+              @mouseover="overRemoveTag = tag"
+              @mouseleave="overRemoveTag = ''"
+              @click="removeTag(tag)"
+            >x</span>
+          </div>
         </div>
       </div>
     </modal>
@@ -87,7 +98,9 @@ export default {
   data() {
     return {
       onPreview: false,
-      tag: ''
+      newTag: '',
+      overTag: '',
+      overRemoveTag: ''
     }
   },
   methods: {
@@ -114,15 +127,20 @@ export default {
       event.preventDefault()
       let index = this.file.tags.indexOf(this.tag)
       if (index === -1) {
-        console.log(this.file.tags)
-        this.file.tags = this.file.tags.concat(this.tag)
+        this.file.tags = this.file.tags.concat(this.newTag)
         axios.put(`http://localhost:8081/api/files/${this.file.id}`, this.file)
       }
-      this.tag = ''
+      this.newTag = ''
     },
     searchBy(key) {
-      this.closePreview()
-      this.$store.commit('setFilter', key)
+      if (this.overRemoveTag === '') {
+        this.closePreview()
+        this.$store.commit('setFilter', key)
+      }
+    },
+    removeTag(tag) {
+      this.file.tags.splice(this.file.tags.indexOf(tag), 1)
+      axios.put(`http://localhost:8081/api/files/${this.file.id}`, this.file)
     }
   }
 }
@@ -170,14 +188,13 @@ export default {
 .card-content {
   display: flex;
   align-items: center;
-  padding: 0 10px;
-  height: 40px;
+  padding: 10px;
 }
 .card-icon {
   margin-right: 10px;
 }
 .card-icon img {
-  height: 20px;
+  height: 14px;
 }
 .card-title {
   display: inline-block;
@@ -191,10 +208,21 @@ export default {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  margin-top: 10px;
+  margin-top: 20px;
 }
-#tags > * {
+.tag {
   margin: 0 10px;
   cursor: pointer;
+}
+.tag:hover {
+  color: var(--color-accent);
+}
+.remove-tag {
+  cursor: pointer;
+  padding: 10px;
+  margin-left: -10px;
+}
+.remove-tag:hover {
+  color: firebrick;
 }
 </style>
