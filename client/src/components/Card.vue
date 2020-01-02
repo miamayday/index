@@ -67,14 +67,14 @@
             :key="tag"
             @mouseover="overTag = tag"
             @mouseleave="overTag = ''"
-            @click="searchBy(tag)"
           >
-            <span class="tag">{{ tag }}</span>
             <span
-              v-if="overTag === tag"
+              class="tag"
+              @click="searchBy(tag)"
+            >{{ tag }}</span>
+            <span
+              v-if="overTag !== '' && overTag === tag"
               class="remove-tag"
-              @mouseover="overRemoveTag = tag"
-              @mouseleave="overRemoveTag = ''"
               @click="removeTag(tag)"
             >x</span>
           </div>
@@ -99,8 +99,7 @@ export default {
     return {
       onPreview: false,
       newTag: '',
-      overTag: '',
-      overRemoveTag: ''
+      overTag: ''
     }
   },
   methods: {
@@ -133,14 +132,13 @@ export default {
       this.newTag = ''
     },
     searchBy(key) {
-      if (this.overRemoveTag === '') {
-        this.closePreview()
-        this.$store.commit('setFilter', key)
-      }
+      this.closePreview()
+      this.$store.commit('setFilter', key)
     },
     removeTag(tag) {
       this.file.tags.splice(this.file.tags.indexOf(tag), 1)
       axios.put(`http://localhost:8081/api/files/${this.file.id}`, this.file)
+      this.overTag = ''
     }
   }
 }
