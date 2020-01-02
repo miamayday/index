@@ -11,7 +11,22 @@
           @mouseleave="() => this.canClose = true"
         >
           <div class="modal-banner">
-            <img :src="this.path" />
+            <img
+              v-if="this.file.type === 'img'"
+              :src="this.path"
+            />
+            <video
+              v-else
+              ref="video"
+              autoplay
+              loop
+              @click="pauseVideo()"
+            >
+              <source
+                :src="path"
+                :type="`video/${this.file.name.split('.').pop()}`"
+              />
+            </video>
           </div>
 
           <div class="modal-content">
@@ -25,7 +40,7 @@
 
             <!-- <div class="modal-footer">
               <slot name="footer">default footer</slot>
-            </div> -->
+            </div>-->
           </div>
         </div>
       </div>
@@ -43,7 +58,7 @@ const $ = JQuery
 export default {
   name: 'modal',
   mixins: [myMixin],
-  props: ['path'],
+  props: ['path', 'file'],
   components: { 'v-button': Button },
   data() {
     return {
@@ -62,6 +77,14 @@ export default {
     closeModal() {
       if (this.canClose) {
         this.$emit('close')
+      }
+    },
+    pauseVideo() {
+      let video = this.$refs.video
+      if (video.paused) {
+        video.play()
+      } else {
+        video.pause()
       }
     }
   }
@@ -112,6 +135,13 @@ export default {
   max-height: 100%;
 }
 .modal-banner img {
+  display: block;
+  max-width: 100%;
+  max-height: 100%;
+  min-width: 0;
+  min-height: 0;
+}
+.modal-banner video {
   display: block;
   max-width: 100%;
   max-height: 100%;

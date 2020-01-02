@@ -3,10 +3,9 @@ search request processor combining tags, type, and format
 automatic tagger script (python?)
 error handling for invalid files
 cross-platform startup
-preview for video
-ability to delete tags in preview
 mobile preview
 fix white space when resizing
 mobile view
 icons for pagination
 infinite scroll?
+preview controls prev next

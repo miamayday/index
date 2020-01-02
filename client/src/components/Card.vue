@@ -16,11 +16,7 @@
       class="card-banner"
     >
       <div class="card-banner-item">
-        <video
-          :id="this.file.id + '_vid'"
-          ref="video"
-          @click="playVideo()"
-        >
+        <video @click="showPreview()">
           <source
             :src="path"
             :type="`video/${this.file.name.split('.').pop()}`"
@@ -48,6 +44,7 @@
     <modal
       v-if="this.onPreview"
       :path="this.path"
+      :file="this.file"
       @close="closePreview()"
     >
       <div slot="title">{{ this.file.name }}</div>
@@ -86,10 +83,12 @@
 
 <script>
 import axios from 'axios'
+import myMixin from '@/mixins/myMixin'
 import Modal from '@/components/Modal'
 
 export default {
   name: 'card',
+  mixins: [myMixin],
   props: {
     path: String,
     file: Object
@@ -134,6 +133,10 @@ export default {
     searchBy(key) {
       this.closePreview()
       this.$store.commit('setFilter', key)
+      this.$store.commit('setPage', 1)
+      this.$store.commit('setStart', 0)
+      this.$store.commit('setEnd', 3 * this.nofColumns())
+      this.overTag = ''
     },
     removeTag(tag) {
       this.file.tags.splice(this.file.tags.indexOf(tag), 1)
@@ -192,7 +195,7 @@ export default {
   margin-right: 10px;
 }
 .card-icon img {
-  height: 14px;
+  height: 16px;
 }
 .card-title {
   display: inline-block;
