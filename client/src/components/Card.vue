@@ -34,7 +34,13 @@
         v-if="this.file.type === 'vid'"
         class="card-icon"
       >
-        <img src="@/film.png" />
+        <img src="@/assets/video_32.png" />
+      </div>
+      <div
+        v-else
+        class="card-icon"
+      >
+        <img src="@/assets/image_32.png" />
       </div>
       <div class="card-title">{{ this.file.name }}</div>
     </div>
@@ -160,14 +166,6 @@ export default {
   object-fit: cover;
   border-top-left-radius: 12px;
   border-top-right-radius: 12px;
-}
-.video-icon {
-  padding: 10px;
-}
-.video-icon img {
-  width: 30px;
-  border-top-left-radius: 0;
-  border-top-right-radius: 0;
 }
 .card-content {
   display: flex;
