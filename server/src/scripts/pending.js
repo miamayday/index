@@ -49,7 +49,7 @@ if (files.length > 0) {
       )
 
       // add link to sqlite3 database
-      dao.addFile({
+      dao.add({
         name: file,
         type,
         tags: []
