@@ -1,9 +1,31 @@
-# shell
+# Demo
 
-## Project setup
+![index demo](demo/demo.gif)
+
+# Project setup
+
+## Linux
+
 ```
 chmod +x startup.sh && ./startup.sh
 ```
+
+## Other
+
+Go to server. Run
+
+```
+npm install
+npm run startup
+```
+
+Go to client. Run
+
+```
+npm install
+```
+
+# shell
 
 ### Runs the project
 ```
