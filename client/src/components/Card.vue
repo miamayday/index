@@ -173,7 +173,7 @@ export default {
 .card-banner img {
   position: absolute;
   width: 100%;
-  max-height: 100%;
+  height: 100%;
   object-fit: cover;
   border-top-left-radius: 12px;
   border-top-right-radius: 12px;
